@@ -16,6 +16,10 @@ use App\Http\Controllers\AuthController;
 */
 Route::get('/auth/google', [AuthController::class, 'redirectToAuth']);
 Route::get('/auth/google/callback', [AuthController::class, 'handleAuthCallback']);
+
+Route::get('/auth/facebook', [AuthController::class, 'redirectToAuthFacebook']);
+Route::get('/auth/facebook/callback', [AuthController::class, 'handleAuthCallbackFacebook']);
+
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 

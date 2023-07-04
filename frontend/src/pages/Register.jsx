@@ -106,11 +106,11 @@ const Register = () => {
                         <Button
                             border="2px solid black"
                             borderRadius="0px"
-                            bgColor="white"
-                            color="black"
+                            bgColor="black"
+                            color="white"
                             size="md"
                             _hover={{
-                                background: "blackAlpha.100",
+                                background: "blackAlpha.800",
                             }}
                         >
                             <img src={google} width="40px" height="40px" />{" "}

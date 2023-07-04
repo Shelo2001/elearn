@@ -24,9 +24,7 @@ const Navbar = () => {
 
     useEffect(() => {
         setUser(JSON.parse(localStorage.getItem("user")));
-    }, [user]);
-
-    console.log(user);
+    }, [setUser]);
 
     return (
         <Box

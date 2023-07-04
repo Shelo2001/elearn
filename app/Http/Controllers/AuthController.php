@@ -49,6 +49,41 @@ class AuthController extends Controller
         ]);
     }
 
+    public function redirectToAuthFacebook(): JsonResponse
+{
+    return response()->json([
+        'url' => Socialite::driver('facebook')->stateless()->redirect()->getTargetUrl(),
+    ]);
+}
+
+public function handleAuthCallbackFacebook()
+{
+    $user = Socialite::driver('facebook')->stateless()->user();
+
+    $existingUser = User::where('email', $user->email)->first();
+
+    if ($existingUser) {
+        Auth::login($existingUser);
+        $token = $existingUser->createToken('auth-token')->plainTextToken;
+    } else {
+        $newUser = new User();
+        $newUser->name = $user->name;
+        $newUser->email = $user->email;
+        $newUser->password = bcrypt(Str::random(10));
+        $newUser->save();
+
+        Auth::login($newUser);
+        $token = $newUser->createToken('auth-token')->plainTextToken;
+    }
+
+    $user = User::find(Auth::id());
+
+    return response()->json([
+        'user' => $user,
+        'token' => $token,
+    ]);
+}
+
     public function register(Request $request){
         $attr = $request->validate([
             'name' => 'required|string',

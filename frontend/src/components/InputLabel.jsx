@@ -5,10 +5,10 @@ const InputLabel = ({ text }) => {
     return (
         <FormLabel
             htmlFor="email"
+            color="gray.500"
             position="absolute"
             transform="translateY(-50%)"
             fontSize="sm"
-            color="gray.500"
             transition="transform 0.2s, font-size 0.2s"
             pointerEvents="none"
             zIndex="1"
