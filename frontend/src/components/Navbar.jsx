@@ -4,17 +4,13 @@ import {
     Flex,
     Button,
     Avatar,
-    IconButton,
     Menu,
     MenuGroup,
     MenuButton,
     MenuList,
-    MenuItem,
-    MenuOptionGroup,
     MenuDivider,
     MenuItemOption,
 } from "@chakra-ui/react";
-import { FaShoppingCart } from "react-icons/fa";
 import logo from "../assets/logo-udemy.svg";
 import { Link } from "react-router-dom";
 import CartComponent from "./CartComponent";
