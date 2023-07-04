@@ -1,12 +1,47 @@
-import React from "react";
-import { Box, Flex, Button, IconButton } from "@chakra-ui/react";
+import React, { useEffect, useState } from "react";
+import {
+    Box,
+    Flex,
+    Button,
+    Avatar,
+    IconButton,
+    Menu,
+    MenuGroup,
+    MenuButton,
+    MenuList,
+    MenuItem,
+    MenuOptionGroup,
+    MenuDivider,
+    MenuItemOption,
+} from "@chakra-ui/react";
 import { FaShoppingCart } from "react-icons/fa";
 import logo from "../assets/logo-udemy.svg";
 import { Link } from "react-router-dom";
+import CartComponent from "./CartComponent";
+import { useAuthentication } from "../services/authentication";
+import Notifications from "./Notifications";
 
 const Navbar = () => {
+    const [user, setUser] = useState(null);
+
+    const { logout } = useAuthentication();
+
+    useEffect(() => {
+        setUser(JSON.parse(localStorage.getItem("user")));
+    }, [user]);
+
+    console.log(user);
+
     return (
-        <Box bg="white" py={4} px={8} color="gray.900" width="100%">
+        <Box
+            bg="white"
+            py={4}
+            px={8}
+            color="gray.900"
+            width="100%"
+            boxShadow="lg"
+            zIndex="10000"
+        >
             <Flex align="center" justify="space-between">
                 <Box>
                     <Link to="/">
@@ -15,48 +50,78 @@ const Navbar = () => {
                 </Box>
 
                 <Box>
-                    <IconButton
-                        icon={<FaShoppingCart />}
-                        aria-label="Cart"
-                        variant="ghost"
-                        colorScheme="gray"
-                        _hover={{
-                            background: "white",
-                            color: "#a832a8",
-                        }}
-                        mr={4}
-                    />
-                    <Link to="/login">
-                        <Button
-                            colorScheme="blackAlpha"
-                            border="2px solid black"
-                            borderRadius="0px"
-                            bgColor="white"
-                            color="black"
-                            size="md"
-                            _hover={{
-                                background: "blackAlpha.100",
-                            }}
-                            mr={2}
-                        >
-                            Login
-                        </Button>
-                    </Link>
-                    <Link to="/register">
-                        <Button
-                            colorScheme="blackAlpha"
-                            border="2px solid black"
-                            borderRadius="0px"
-                            bgColor="black"
-                            color="white"
-                            _hover={{
-                                background: "blackAlpha.900",
-                            }}
-                            size="md"
-                        >
-                            Register
-                        </Button>
-                    </Link>
+                    <CartComponent />
+
+                    {user?.name ? (
+                        <>
+                            <Notifications />
+                            <Menu>
+                                <MenuButton>
+                                    <Avatar
+                                        size="sm"
+                                        bg="#a832a8"
+                                        name={user.name}
+                                    />
+                                </MenuButton>
+                                <MenuList>
+                                    <MenuGroup title="MANAGE PROFILE">
+                                        <Link to="/mylearning">
+                                            <MenuItemOption>
+                                                My Learning
+                                            </MenuItemOption>
+                                        </Link>
+                                        <Link to="/cart">
+                                            <MenuItemOption>
+                                                My Cart
+                                            </MenuItemOption>
+                                        </Link>
+                                    </MenuGroup>
+                                    <MenuDivider />
+                                    <Link to="/profile">
+                                        <MenuItemOption>Profile</MenuItemOption>
+                                    </Link>
+                                    <MenuDivider />
+                                    <MenuItemOption onClick={() => logout()}>
+                                        Log Out
+                                    </MenuItemOption>
+                                </MenuList>
+                            </Menu>
+                        </>
+                    ) : (
+                        <>
+                            <Link to="/login">
+                                <Button
+                                    colorScheme="blackAlpha"
+                                    border="2px solid black"
+                                    borderRadius="0px"
+                                    bgColor="white"
+                                    color="black"
+                                    size="md"
+                                    _hover={{
+                                        background: "blackAlpha.100",
+                                    }}
+                                    mr={2}
+                                >
+                                    Login
+                                </Button>
+                            </Link>
+                            <Link to="/register">
+                                <Button
+                                    colorScheme="blackAlpha"
+                                    border="2px solid black"
+                                    borderRadius="0px"
+                                    bgColor="black"
+                                    color="white"
+                                    _hover={{
+                                        background: "blackAlpha.900",
+                                    }}
+                                    size="md"
+                                >
+                                    Register
+                                </Button>
+                            </Link>
+                        </>
+                    )}
                 </Box>
             </Flex>
         </Box>

@@ -13,9 +13,15 @@ import {
 import google from "../assets/google.png";
 import InputLabel from "../components/InputLabel";
 import { Link as ReachLink } from "react-router-dom";
+import { useAuthentication } from "../services/authentication";
 
 const Login = () => {
     const [login, setLogin] = useState("");
+
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+
+    const { login: loginUser } = useAuthentication();
 
     useEffect(() => {
         const googleLogin = async () => {
@@ -27,12 +33,18 @@ const Login = () => {
         googleLogin();
     }, []);
 
+    const submitHandler = (e) => {
+        e.preventDefault();
+        loginUser({ email, password });
+    };
+
     return (
         <div>
             <h2
                 style={{
                     textAlign: "center",
                     fontSize: "30px",
+                    marginTop: "30px",
                     marginBottom: "30px",
                     fontWeight: "bold",
                 }}
@@ -46,11 +58,12 @@ const Login = () => {
                 borderRadius="md"
                 margin="0 auto"
             >
-                <form>
+                <form onSubmit={submitHandler}>
                     <Stack spacing={4}>
                         <FormControl>
                             <InputLabel text="Email" />
                             <Input
+                                onChange={(e) => setEmail(e.target.value)}
                                 type="email"
                                 id="email"
                                 focusBorderColor="black"
@@ -62,6 +75,7 @@ const Login = () => {
                         <FormControl>
                             <InputLabel text="Password" />
                             <Input
+                                onChange={(e) => setPassword(e.target.value)}
                                 type="password"
                                 id="password"
                                 focusBorderColor="black"

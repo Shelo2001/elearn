@@ -37,6 +37,7 @@ const Register = () => {
                     textAlign: "center",
                     fontSize: "30px",
                     marginBottom: "30px",
+                    marginTop: "30px",
                     fontWeight: "bold",
                 }}
             >
@@ -98,13 +99,11 @@ const Register = () => {
                                 border: "2px solid #7b247b",
                                 bgColor: "#7b247b",
                             }}
-                            colorScheme="teal"
                         >
                             Sign Up
                         </Button>
 
                         <Button
-                            colorScheme="red"
                             border="2px solid black"
                             borderRadius="0px"
                             bgColor="white"

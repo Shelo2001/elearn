@@ -1,7 +1,6 @@
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 
 export const useAuthentication = create(
     devtools((set) => ({
@@ -86,7 +85,7 @@ export const useAuthentication = create(
             console.log(res);
             localStorage.setItem("token", res.data.token);
             localStorage.setItem("user", JSON.stringify(res.data.user));
-            set({ user: res.data.user, token: res.data.access_token });
+            window.location.href = "/";
         },
     }))
 );

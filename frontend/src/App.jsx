@@ -5,6 +5,7 @@ import GoogleCallback from "./components/Callback";
 import DefaultLayout from "./components/DefaultLayout";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
+import Cart from "./pages/Cart";
 
 const router = createBrowserRouter([
     {
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
             {
                 path: "/auth/google",
                 element: <GoogleCallback />,
+            },
+            {
+                path: "/cart",
+                element: <Cart />,
             },
         ],
     },

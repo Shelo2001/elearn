@@ -40,7 +40,7 @@ class AuthController extends Controller
             $token = $newUser->createToken('auth-token')->plainTextToken;
         }
     
-        $user =User::find(Auth::id());
+        $user = User::find(Auth::id());
 
 
         return response()->json([
