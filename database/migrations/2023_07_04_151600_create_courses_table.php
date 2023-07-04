@@ -17,7 +17,7 @@ return new class extends Migration
             $table->text('description');
             $table->integer('duration_minutes');
             $table->integer('price');
-            $table->integer('category');
+            $table->string('category');
             $table->boolean('is_published')->default(false);
             $table->unsignedBigInteger('author')->unsigned();
             $table->foreign('author')->references('id')->on('users')->onDelete('cascade');

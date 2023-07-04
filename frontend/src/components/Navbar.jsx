@@ -71,10 +71,17 @@ const Navbar = () => {
                                         </Link>
                                     </MenuGroup>
                                     <MenuDivider />
+                                    <Link to="/create">
+                                        <MenuItemOption>
+                                            Create Course
+                                        </MenuItemOption>
+                                    </Link>
+                                    <MenuDivider />
                                     <Link to="/profile">
                                         <MenuItemOption>Profile</MenuItemOption>
                                     </Link>
                                     <MenuDivider />
+
                                     <MenuItemOption onClick={() => logout()}>
                                         Log Out
                                     </MenuItemOption>

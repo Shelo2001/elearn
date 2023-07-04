@@ -6,6 +6,7 @@ import DefaultLayout from "./components/DefaultLayout";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Cart from "./pages/Cart";
+import CourseCreate from "./pages/CourseCreate";
 
 const router = createBrowserRouter([
     {
@@ -35,6 +36,10 @@ const router = createBrowserRouter([
             {
                 path: "/cart",
                 element: <Cart />,
+            },
+            {
+                path: "/create",
+                element: <CourseCreate />,
             },
         ],
     },
