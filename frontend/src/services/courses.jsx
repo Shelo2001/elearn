@@ -4,6 +4,7 @@ import axios from "axios";
 
 export const useCourses = create(
     devtools((set) => ({
+        courses: [],
         loading: false,
         success: null,
         createCourse: async (data) => {
@@ -38,6 +39,13 @@ export const useCourses = create(
                     });
                 }, 3000);
             }
+        },
+        getCourseByCategory: async (category) => {
+            set({ loading: true });
+            const { data } = await axios.get(
+                `${import.meta.env.VITE_BASE_URL}/courses/${category}`
+            );
+            set({ courses: data.courses.data, loading: false });
         },
     }))
 );

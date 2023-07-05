@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
     Popover,
     PopoverTrigger,
@@ -11,8 +11,13 @@ import {
 } from "@chakra-ui/react";
 import { FaShoppingCart } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { useCartStore } from "../services/cart";
 
 const CartComponent = () => {
+    const { cartItems } = useCartStore();
+
+    useEffect(() => {}, [cartItems]);
+
     return (
         <Popover>
             <PopoverTrigger>
@@ -31,11 +36,9 @@ const CartComponent = () => {
             <Portal>
                 <PopoverContent>
                     <PopoverBody>
-                        <div>asdasd</div>
-                        <div>asdasd</div>
-                        <div>asdasd</div>
-                        <div>asdasd</div>
-                        <div>asdasd</div>
+                        {cartItems?.map((item) => (
+                            <div>{item.title}</div>
+                        ))}
                     </PopoverBody>
                     <PopoverFooter>
                         <Link to="/cart">

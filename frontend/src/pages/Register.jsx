@@ -90,14 +90,14 @@ const Register = () => {
 
                         <Button
                             type="submit"
-                            border="2px solid #a832a8"
+                            border="2px solid #a435f0"
                             borderRadius="0px"
-                            bgColor="#a832a8"
+                            bgColor="#a435f0"
                             color="white"
                             size="md"
                             _hover={{
-                                border: "2px solid #7b247b",
-                                bgColor: "#7b247b",
+                                border: "2px solid #7325a3",
+                                bgColor: "#7325a3",
                             }}
                         >
                             Sign Up
@@ -128,7 +128,7 @@ const Register = () => {
                     <p>
                         Allready have an account?{" "}
                         <Link as={ReachLink} to="/login">
-                            <Link color="#a832a8">Sign In</Link>
+                            <Link color="#a435f0">Sign In</Link>
                         </Link>
                     </p>
                 </Box>

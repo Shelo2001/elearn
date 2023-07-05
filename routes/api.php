@@ -24,6 +24,8 @@ Route::get('/auth/facebook/callback', [AuthController::class, 'handleAuthCallbac
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 
+Route::get('/courses/{category}', [CourseController::class, 'getCourseByCategory']);
+
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/profile', function(Request $request) {
         return auth()->user();

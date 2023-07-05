@@ -52,7 +52,7 @@ const CourseCreate = () => {
             price,
             category,
             image,
-            author: JSON.parse(localStorage.getItem("user")).id,
+            user_id: JSON.parse(localStorage.getItem("user")).id,
         };
 
         createCourse(data);

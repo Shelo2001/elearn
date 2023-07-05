@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\User;
+use App\Models\Rating;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Course extends Model
 {
@@ -16,7 +18,15 @@ class Course extends Model
         "price",
         "category",
         "is_published",
-        "author",
+        "user_id",
         "image",
     ];
+
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
+
+    public function rating(){
+        return $this->hasMany(Rating::class);
+    }
 }

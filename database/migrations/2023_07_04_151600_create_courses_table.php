@@ -19,8 +19,8 @@ return new class extends Migration
             $table->integer('price');
             $table->string('category');
             $table->boolean('is_published')->default(false);
-            $table->unsignedBigInteger('author')->unsigned();
-            $table->foreign('author')->references('id')->on('users')->onDelete('cascade');
+            $table->unsignedBigInteger('user_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('image')->nullable();
             $table->timestamps();
         });

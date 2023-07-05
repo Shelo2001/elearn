@@ -15,7 +15,7 @@ class CourseController extends Controller
             'duration_minutes'=>'required',
             'price' => 'required',
             'category' => 'required',
-            'author' => 'required',
+            'user_id' => 'required',
             'image' => 'required'
         ]);
 
@@ -25,7 +25,7 @@ class CourseController extends Controller
         $course->duration_minutes = $request->duration_minutes;
         $course->price = $request->price;
         $course->category = $request->category;
-        $course->author = $request->author;
+        $course->user_id = $request->user_id;
         if($request->image!=''){
             $strpos = strpos($request->image, ';');
             $sub = substr($request->image, 0, $strpos);
@@ -41,5 +41,12 @@ class CourseController extends Controller
         $course->save();
         return response([
         "course"=>$course,"success"=>true],201);
+    }
+
+    public function getCourseByCategory($category){
+        $courses = Course::where('category',$category)->where('is_published',true)->with('user:id,name','rating')->paginate(8);
+    
+
+        return response(["courses"=>$courses,],200);
     }
 }
