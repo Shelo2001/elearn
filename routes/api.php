@@ -25,6 +25,7 @@ Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 
 Route::get('/courses/{category}', [CourseController::class, 'getCourseByCategory']);
+Route::get('/courses/course/{courseId}', [CourseController::class, 'getCourseById']);
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/profile', function(Request $request) {
@@ -32,4 +33,6 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     });
     Route::get('/logout', [AuthController::class, 'logout']);
     Route::post('/course/create', [CourseController::class, 'createCourse']);
+    Route::post('/course/review/create', [CourseController::class, 'createReview']);
+
 });

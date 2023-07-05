@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
     FormControl,
     FormLabel,
@@ -12,20 +12,39 @@ import {
 import { Link as ReachLink, useParams } from "react-router-dom";
 import ReactStars from "react-rating-stars-component";
 import { BsStar, BsStarFill } from "react-icons/bs";
+import { useCourses } from "../services/courses";
 
 const SingleCourse = () => {
     const user = JSON.parse(localStorage.getItem("user"));
     const { id } = useParams();
 
-    const [reviewRating, setReviewRating] = useState(0);
+    const { getCourseById, course, createReview } = useCourses();
 
-    const userHasRated = course.rating.some(
-        (rating) => rating.user_id === user.id
-    );
+    useEffect(() => {
+        getCourseById(id);
+    }, []);
+
+    const [reviewRating, setReviewRating] = useState(0);
+    const [comment, setComment] = useState(0);
+
+    const userHasRated =
+        course?.rating?.some((rating) => rating.user_id === user?.id) ?? false;
+
+    const submitHandler = (e) => {
+        e.preventDefault();
+        let data = {
+            course_id: course.id,
+            user_id: user.id,
+            rating: reviewRating,
+            comment,
+        };
+
+        createReview(data);
+    };
 
     return (
         <Box w={"40%"}>
-            {user ? (
+            {!userHasRated && user ? (
                 <Box p={4} boxShadow="lg" borderRadius="md" margin="0 auto">
                     <h2
                         style={{
@@ -38,7 +57,7 @@ const SingleCourse = () => {
                     >
                         Write a review
                     </h2>
-                    <form>
+                    <form onSubmit={submitHandler}>
                         <FormControl id="rating">
                             <FormLabel>Rating</FormLabel>
                             <Box mt={2}>
@@ -63,6 +82,7 @@ const SingleCourse = () => {
                                 focusBorderColor="black"
                                 border="1px solid black"
                                 borderRadius="0"
+                                onChange={(e) => setComment(e.target.value)}
                             />
                         </FormControl>
                         <Button
@@ -82,7 +102,7 @@ const SingleCourse = () => {
                         </Button>
                     </form>
                 </Box>
-            ) : (
+            ) : { user } ? (
                 <Alert>
                     Please&nbsp;
                     <ReachLink to="/login">
@@ -90,6 +110,8 @@ const SingleCourse = () => {
                     </ReachLink>
                     &nbsp;to write a review
                 </Alert>
+            ) : (
+                <Alert>You already reviewed post!</Alert>
             )}
         </Box>
     );

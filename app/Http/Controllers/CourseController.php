@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Course;
+use App\Models\Rating;
+use App\Models\Comment;
 use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
 
@@ -45,8 +47,32 @@ class CourseController extends Controller
 
     public function getCourseByCategory($category){
         $courses = Course::where('category',$category)->where('is_published',true)->with('user:id,name','rating')->paginate(8);
-    
-
         return response(["courses"=>$courses,],200);
+    }
+
+    public function getCourseById($courseId){
+        $course = Course::where('id',$courseId)->where('is_published',true)->with('user:id,name','rating','comment.user:id,name')->first();
+        return response(["course"=>$course,],200);
+    }
+
+    public function createReview(Request $request){
+        $attr = $request->validate([
+            'course_id' => 'required',
+            'user_id' => 'required',
+            'rating' => 'required',
+            'comment' => 'required'
+        ]);
+
+        $rating = new Rating();
+        $comment = new Comment();
+        $rating->course_id = $request->course_id;
+        $rating->user_id = $request->user_id;
+        $rating->rating = $request->rating;
+        $comment->course_id = $request->course_id;
+        $comment->user_id = $request->user_id;
+        $comment->comment = $request->comment;
+        $rating->save();
+        $comment->save();
+        return response(["success"=>true],201);
     }
 }

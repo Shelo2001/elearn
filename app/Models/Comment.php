@@ -6,12 +6,12 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Rating extends Model
+class Comment extends Model
 {
     use HasFactory;
 
     protected $fillable=[
-        'rating',
+        'comment',
         'course_id',
         'user_id',
     ];
