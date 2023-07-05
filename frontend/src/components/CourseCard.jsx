@@ -6,19 +6,12 @@ import {
     Stack,
     Heading,
     Text,
-    Button,
     Popover,
     Portal,
     PopoverContent,
     PopoverArrow,
-    PopoverHeader,
-    PopoverCloseButton,
     PopoverBody,
-    PopoverFooter,
     PopoverTrigger,
-    Flex,
-    Icon,
-    Box,
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import PopoverCourse from "./PopoverCourse";
@@ -85,8 +78,8 @@ const CourseCard = ({ course }) => {
                                         value={totalRating}
                                         text={
                                             totalRating === "NaN"
-                                                ? `0 review`
-                                                : `${totalRating} reviews`
+                                                ? `(0) review`
+                                                : `(${course.rating.length}) reviews`
                                         }
                                         color={"#FDCC0D"}
                                     />

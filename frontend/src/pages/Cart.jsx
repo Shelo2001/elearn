@@ -7,11 +7,13 @@ import {
     Image,
     Stack,
     Text,
+    Link,
 } from "@chakra-ui/react";
 import React from "react";
 import { useCartStore } from "../services/cart";
-import { Link } from "react-router-dom";
+import { Link as ReachLink } from "react-router-dom";
 import nocart from "../assets/nocart.jpg";
+import Rating from "../components/Rating";
 
 const Cart = () => {
     const { cartItems, removeFromCart } = useCartStore();
@@ -72,7 +74,7 @@ const Cart = () => {
                                     width="100%"
                                     display="grid"
                                     gridTemplateColumns="repeat(4, 1fr)"
-                                    gap="4"
+                                    gap="5"
                                 >
                                     <Box gridColumn="1">
                                         <Image
@@ -86,11 +88,19 @@ const Cart = () => {
                                         />
                                     </Box>
                                     <Stack gridColumn="2" spacing="2">
-                                        <Text fontSize="lg" fontWeight="bold">
-                                            {item.title}
-                                        </Text>
+                                        <ReachLink to={`/course/${item.id}`}>
+                                            <Link>
+                                                <Text
+                                                    fontSize="lg"
+                                                    fontWeight="bold"
+                                                >
+                                                    {item.title}
+                                                </Text>
+                                            </Link>
+                                        </ReachLink>
                                         <Flex alignItems="center">
                                             <Text>by {item.user.name}</Text>
+
                                             <Text
                                                 fontSize="sm"
                                                 color="gray.500"
@@ -98,18 +108,19 @@ const Cart = () => {
                                             >
                                                 |
                                             </Text>
-                                            <Text>
-                                                {item.duration_minutes} mins
-                                            </Text>
-                                            <Text
-                                                fontSize="sm"
-                                                color="gray.500"
-                                                mx="1"
-                                            >
-                                                |
-                                            </Text>
-                                            <Text>
-                                                {item.rating.length} stars
+                                            <Text w={"220px"}>
+                                                <Rating
+                                                    value={
+                                                        item.rating.reduce(
+                                                            (sum, rating) =>
+                                                                sum +
+                                                                rating.rating,
+                                                            0
+                                                        ) / item.rating.length
+                                                    }
+                                                    text={`(${item.rating.length}) reviews`}
+                                                    color={"#FDCC0D"}
+                                                />
                                             </Text>
                                         </Flex>
                                     </Stack>
