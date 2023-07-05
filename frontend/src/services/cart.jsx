@@ -6,6 +6,12 @@ export const useCartStore = create(
         cartItems: JSON.parse(localStorage.getItem("cartItems")) || [],
         addToCart: (item) => {
             set((state) => {
+                const isItemInCart = state.cartItems.some(
+                    (cartItem) => cartItem.id === item.id
+                );
+                if (isItemInCart) {
+                    return state;
+                }
                 const updatedCartItems = [...state.cartItems, item];
                 localStorage.setItem(
                     "cartItems",

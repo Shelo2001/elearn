@@ -8,6 +8,12 @@ import {
     PopoverFooter,
     IconButton,
     Button,
+    Text,
+    CardBody,
+    Stack,
+    Card,
+    Image,
+    Divider,
 } from "@chakra-ui/react";
 import { FaShoppingCart } from "react-icons/fa";
 import { Link } from "react-router-dom";
@@ -37,9 +43,37 @@ const CartComponent = () => {
                 <PopoverContent>
                     <PopoverBody>
                         {cartItems?.map((item) => (
-                            <div>{item.title}</div>
+                            <Link to={`/course/${item.id}`}>
+                                <Card
+                                    direction={{ base: "column", sm: "row" }}
+                                    overflow="hidden"
+                                    variant="outline"
+                                    mb={"10px"}
+                                >
+                                    <Image
+                                        objectFit="contain"
+                                        w="100px"
+                                        src={`${import.meta.env.VITE_IMG_URL}/${
+                                            item.image
+                                        }`}
+                                        alt="Caffe Latte"
+                                    />
+
+                                    <Stack>
+                                        <CardBody>
+                                            <Text>{item.title}</Text>
+                                            <Text>{item.user.name}</Text>
+                                            <Text>{item.price}</Text>
+                                        </CardBody>
+                                    </Stack>
+                                </Card>
+                            </Link>
                         ))}
                     </PopoverBody>
+                    <Divider />
+                    <Text marginTop={"15px"} marginBottom={"15px"}>
+                        asd
+                    </Text>
                     <PopoverFooter>
                         <Link to="/cart">
                             <Button
