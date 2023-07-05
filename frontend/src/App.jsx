@@ -7,6 +7,7 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Cart from "./pages/Cart";
 import CourseCreate from "./pages/CourseCreate";
+import SingleCourse from "./pages/SingleCourse";
 
 const router = createBrowserRouter([
     {
@@ -40,6 +41,10 @@ const router = createBrowserRouter([
             {
                 path: "/create",
                 element: <CourseCreate />,
+            },
+            {
+                path: "/course/:id",
+                element: <SingleCourse />,
             },
         ],
     },

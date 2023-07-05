@@ -16,9 +16,13 @@ import {
     PopoverBody,
     PopoverFooter,
     PopoverTrigger,
+    Flex,
+    Icon,
+    Box,
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import PopoverCourse from "./PopoverCourse";
+import Rating from "./Rating";
 
 const CourseCard = ({ course }) => {
     const [isPopoverOpen, setIsPopoverOpen] = useState(false);
@@ -34,6 +38,11 @@ const CourseCard = ({ course }) => {
     const handleContainerMouseLeave = () => {
         setIsPopoverOpen(false);
     };
+
+    const totalRating = (
+        course.rating.reduce((sum, rating) => sum + rating.rating, 0) /
+        course.rating.length
+    ).toFixed(1);
 
     return (
         <div
@@ -51,7 +60,7 @@ const CourseCard = ({ course }) => {
                     <PopoverTrigger>
                         <Card
                             cursor="pointer"
-                            height="340px"
+                            height="380px"
                             w="sm"
                             borderRadius={"0px"}
                         >
@@ -72,6 +81,15 @@ const CourseCard = ({ course }) => {
                                     <Text fontSize={"16px"} color={"gray.500"}>
                                         {course.user.name}
                                     </Text>
+                                    <Rating
+                                        value={totalRating}
+                                        text={
+                                            totalRating === "NaN"
+                                                ? `0 review`
+                                                : `${totalRating} reviews`
+                                        }
+                                        color={"#FDCC0D"}
+                                    />
                                     <Text
                                         color="blackAlpha"
                                         fontWeight="bolder"
