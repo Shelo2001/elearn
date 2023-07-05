@@ -14,6 +14,7 @@ import {
     Card,
     Image,
     Divider,
+    Box,
 } from "@chakra-ui/react";
 import { FaShoppingCart } from "react-icons/fa";
 import { Link } from "react-router-dom";
@@ -23,6 +24,8 @@ const CartComponent = () => {
     const { cartItems } = useCartStore();
 
     useEffect(() => {}, [cartItems]);
+
+    const totalPrice = cartItems.reduce((sum, course) => sum + course.price, 0);
 
     return (
         <Popover>
@@ -42,37 +45,65 @@ const CartComponent = () => {
             <Portal>
                 <PopoverContent>
                     <PopoverBody>
-                        {cartItems?.map((item) => (
-                            <Link to={`/course/${item.id}`}>
-                                <Card
-                                    direction={{ base: "column", sm: "row" }}
-                                    overflow="hidden"
-                                    variant="outline"
-                                    mb={"10px"}
-                                >
-                                    <Image
-                                        objectFit="contain"
-                                        w="100px"
-                                        src={`${import.meta.env.VITE_IMG_URL}/${
-                                            item.image
-                                        }`}
-                                        alt="Caffe Latte"
-                                    />
+                        <Box maxH="350px" overflowY="auto">
+                            {cartItems?.map((item) => (
+                                <Link to={`/course/${item.id}`}>
+                                    <Card
+                                        direction={{
+                                            base: "column",
+                                            sm: "row",
+                                        }}
+                                        overflow="hidden"
+                                        variant="outline"
+                                        mb={"10px"}
+                                    >
+                                        <Image
+                                            objectFit="contain"
+                                            w="100px"
+                                            px={"1"}
+                                            src={`${
+                                                import.meta.env.VITE_IMG_URL
+                                            }/${item.image}`}
+                                            alt="Caffe Latte"
+                                        />
 
-                                    <Stack>
-                                        <CardBody>
-                                            <Text>{item.title}</Text>
-                                            <Text>{item.user.name}</Text>
-                                            <Text>{item.price}</Text>
-                                        </CardBody>
-                                    </Stack>
-                                </Card>
-                            </Link>
-                        ))}
+                                        <Stack>
+                                            <CardBody>
+                                                <Text
+                                                    fontSize={"20px"}
+                                                    color={"black"}
+                                                    fontWeight={"extrabold"}
+                                                >
+                                                    {item.title}
+                                                </Text>
+                                                <Text
+                                                    fontSize="15px"
+                                                    color={"gray.500"}
+                                                >
+                                                    {item.user.name}
+                                                </Text>
+                                                <Text
+                                                    fontSize="15px"
+                                                    fontWeight="medium"
+                                                >
+                                                    {item.price} $
+                                                </Text>
+                                            </CardBody>
+                                        </Stack>
+                                    </Card>
+                                </Link>
+                            ))}
+                        </Box>
                     </PopoverBody>
                     <Divider />
-                    <Text marginTop={"15px"} marginBottom={"15px"}>
-                        asd
+                    <Text
+                        px={"2"}
+                        fontSize={"22px"}
+                        fontWeight={"bold"}
+                        marginTop={"15px"}
+                        marginBottom={"15px"}
+                    >
+                        Total Price: {totalPrice} $
                     </Text>
                     <PopoverFooter>
                         <Link to="/cart">

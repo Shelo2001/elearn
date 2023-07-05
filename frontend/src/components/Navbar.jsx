@@ -16,11 +16,13 @@ import { Link } from "react-router-dom";
 import CartComponent from "./CartComponent";
 import { useAuthentication } from "../services/authentication";
 import Notifications from "./Notifications";
+import { useCartStore } from "../services/cart";
 
 const Navbar = () => {
     const [user, setUser] = useState(null);
 
     const { logout } = useAuthentication();
+    const { cartItems } = useCartStore();
 
     useEffect(() => {
         setUser(JSON.parse(localStorage.getItem("user")));
@@ -45,7 +47,6 @@ const Navbar = () => {
 
                 <Box>
                     <CartComponent />
-
                     {user?.name ? (
                         <>
                             <Notifications />
@@ -53,7 +54,8 @@ const Navbar = () => {
                                 <MenuButton>
                                     <Avatar
                                         size="sm"
-                                        bg="#a832a8"
+                                        bg="black"
+                                        color="white"
                                         name={user.name}
                                     />
                                 </MenuButton>
