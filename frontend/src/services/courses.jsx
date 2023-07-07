@@ -55,6 +55,15 @@ export const useCourses = create(
             );
             set({ course: data.course, loading: false });
         },
+        getMyCreatedCourses: async (id) => {
+            set({ loading: true });
+            let token = localStorage.getItem("token");
+            const { data } = await axios.get(
+                `${import.meta.env.VITE_BASE_URL}/course/mycourses/${id}`,
+                { headers: { Authorization: `Bearer ${token}` } }
+            );
+            set({ courses: data.courses, loading: false });
+        },
         createReview: async (data) => {
             try {
                 let token = localStorage.getItem("token");

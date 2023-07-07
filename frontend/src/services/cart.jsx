@@ -3,6 +3,7 @@ import { devtools } from "zustand/middleware";
 
 export const useCartStore = create(
     devtools((set) => ({
+        addToCartSuccess: false,
         cartItems: JSON.parse(localStorage.getItem("cartItems")) || [],
         addToCart: (item) => {
             set((state) => {
@@ -17,6 +18,12 @@ export const useCartStore = create(
                     "cartItems",
                     JSON.stringify(updatedCartItems)
                 );
+                set({ addToCartSuccess: true });
+                setTimeout(() => {
+                    set({
+                        addToCartSuccess: null,
+                    });
+                }, 3000);
                 return { cartItems: updatedCartItems };
             });
         },

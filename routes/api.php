@@ -34,5 +34,6 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/logout', [AuthController::class, 'logout']);
     Route::post('/course/create', [CourseController::class, 'createCourse']);
     Route::post('/course/review/create', [CourseController::class, 'createReview']);
-
+    Route::get('/course/mycourses/{userId}', [CourseController::class, 'getMyCreatedCourses']);
+    
 });

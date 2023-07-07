@@ -75,4 +75,10 @@ class CourseController extends Controller
         $comment->save();
         return response(["success"=>true],201);
     }
+
+    public function getMyCreatedCourses($userId){
+        $courses = Course::where('user_id',$userId)->with('user:id,name','rating','comment.user:id,name')->get();
+
+        return response(["courses"=>$courses],200);
+    }
 }
