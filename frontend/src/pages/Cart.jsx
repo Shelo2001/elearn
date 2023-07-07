@@ -41,7 +41,7 @@ const Cart = () => {
                     <Text marginY={"30px"}>
                         Your cart is empty. Keep shopping to find a course!
                     </Text>
-                    <Link to="/home">
+                    <ReachLink to="/home">
                         <Button
                             border="2px solid #a435f0"
                             borderRadius="0px"
@@ -55,7 +55,7 @@ const Cart = () => {
                         >
                             Keep shopping
                         </Button>
-                    </Link>
+                    </ReachLink>
                 </Box>
             ) : (
                 <Box display="flex" justifyContent="space-between">

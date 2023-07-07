@@ -1,119 +1,71 @@
 import React, { useEffect, useState } from "react";
-import {
-    FormControl,
-    FormLabel,
-    Select,
-    Textarea,
-    Button,
-    Alert,
-    Link,
-    Box,
-} from "@chakra-ui/react";
-import { Link as ReachLink, useParams } from "react-router-dom";
-import ReactStars from "react-rating-stars-component";
-import { BsStar, BsStarFill } from "react-icons/bs";
+
+import { useParams } from "react-router-dom";
 import { useCourses } from "../services/courses";
+import ReviewComponent from "../components/ReviewComponent";
+import { Avatar, Box, Divider, Text, useDisclosure } from "@chakra-ui/react";
+import ReviewModal from "../components/ReviewModal";
+import Rating from "../components/Rating";
 
 const SingleCourse = () => {
-    const user = JSON.parse(localStorage.getItem("user"));
     const { id } = useParams();
+    const { isOpen, onOpen, onClose } = useDisclosure();
+    const { getCourseById, course } = useCourses();
 
-    const { getCourseById, course, createReview } = useCourses();
+    console.log(course);
 
     useEffect(() => {
         getCourseById(id);
     }, []);
 
-    const [reviewRating, setReviewRating] = useState(0);
-    const [comment, setComment] = useState(0);
-
-    const userHasRated =
-        course?.rating?.some((rating) => rating.user_id === user?.id) ?? false;
-
-    const submitHandler = (e) => {
-        e.preventDefault();
-        let data = {
-            course_id: course.id,
-            user_id: user.id,
-            rating: reviewRating,
-            comment,
-        };
-
-        createReview(data);
-    };
-
     return (
-        <Box w={"40%"}>
-            {!userHasRated && user ? (
-                <Box p={4} boxShadow="lg" borderRadius="md" margin="0 auto">
-                    <h2
-                        style={{
-                            textAlign: "center",
-                            fontSize: "30px",
-                            marginBottom: "30px",
-                            marginTop: "30px",
-                            fontWeight: "bold",
-                        }}
-                    >
-                        Write a review
-                    </h2>
-                    <form onSubmit={submitHandler}>
-                        <FormControl id="rating">
-                            <FormLabel>Rating</FormLabel>
-                            <Box mt={2}>
-                                <ReactStars
-                                    count={5}
-                                    size={24}
-                                    onChange={(newRating) =>
-                                        setReviewRating(newRating)
+        <div>
+            <Box mx={"30px"} w={"50%"} display={"flex"} gap={"10px"}>
+                {course?.comment?.slice(0, 2).map((com) => (
+                    <Box marginY={"10px"} maxH={"200px"} w={"50%"}>
+                        <Divider />
+                        <Box mt={"10px"} display={"flex"} gap={"20px"}>
+                            <Avatar
+                                name={com.user.name}
+                                color={"white"}
+                                bg={"black"}
+                            />
+                            <Box display={"flex"} flexDirection={"column"}>
+                                <Text fontWeight={"bold"} fontSize={"20px"}>
+                                    {com.user.name}
+                                </Text>
+                                <Rating
+                                    value={
+                                        course.rating.find(
+                                            (rating) =>
+                                                rating.user_id === com.user.id
+                                        )?.rating || 0
                                     }
-                                    activeColor="#FDCC0D"
-                                    emptyIcon={<BsStar />}
-                                    filledIcon={<BsStarFill />}
+                                    text={`(${
+                                        course.rating.find(
+                                            (rating) =>
+                                                rating.user_id === com.user.id
+                                        )?.rating || 0
+                                    })`}
+                                    color={"#FDCC0D"}
                                 />
                             </Box>
-                        </FormControl>
-                        <FormControl id="comment">
-                            <FormLabel>Comment</FormLabel>
-                            <Textarea
-                                type="text"
-                                id="description"
-                                rows={"3"}
-                                focusBorderColor="black"
-                                border="1px solid black"
-                                borderRadius="0"
-                                onChange={(e) => setComment(e.target.value)}
-                            />
-                        </FormControl>
-                        <Button
-                            mt={"10px"}
-                            border="2px solid black"
-                            borderRadius="0px"
-                            bgColor="black"
-                            color="white"
-                            size="md"
-                            _hover={{
-                                background: "blackAlpha.800",
-                            }}
-                            type="submit"
-                            colorScheme="blue"
-                        >
-                            Submit review
-                        </Button>
-                    </form>
-                </Box>
-            ) : { user } ? (
-                <Alert>
-                    Please&nbsp;
-                    <ReachLink to="/login">
-                        <Link>sign in</Link>
-                    </ReachLink>
-                    &nbsp;to write a review
-                </Alert>
-            ) : (
-                <Alert>You already reviewed post!</Alert>
+                        </Box>
+
+                        <Box m={"20px"}>{com.comment.substring(0, 300)}</Box>
+                    </Box>
+                ))}
+            </Box>
+            {course?.comment?.length != 0 && (
+                <ReviewModal
+                    isOpen={isOpen}
+                    onOpen={onOpen}
+                    onClose={onClose}
+                    course={course}
+                />
             )}
-        </Box>
+            <ReviewComponent course={course} />
+        </div>
     );
 };
 

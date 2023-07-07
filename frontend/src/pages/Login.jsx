@@ -113,6 +113,11 @@ const Login = () => {
                             <img src={google} width="40px" height="40px" />{" "}
                             <a href={`${login}`}>Continue with Google</a>
                         </Button>
+                        <ReachLink to="/forgot-password">
+                            <Link float={"right"} color="#a435f0">
+                                Forgot password?
+                            </Link>
+                        </ReachLink>
                     </Stack>
                 </form>
                 <Box position="relative" padding="10">

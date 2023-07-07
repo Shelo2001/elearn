@@ -8,6 +8,7 @@ import Login from "./pages/Login";
 import Cart from "./pages/Cart";
 import CourseCreate from "./pages/CourseCreate";
 import SingleCourse from "./pages/SingleCourse";
+import ForgotPassword from "./pages/ForgotPassword";
 
 const router = createBrowserRouter([
     {
@@ -45,6 +46,10 @@ const router = createBrowserRouter([
             {
                 path: "/course/:id",
                 element: <SingleCourse />,
+            },
+            {
+                path: "/forgot-password",
+                element: <ForgotPassword />,
             },
         ],
     },
