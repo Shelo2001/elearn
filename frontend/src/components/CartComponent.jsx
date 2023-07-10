@@ -64,7 +64,6 @@ const CartComponent = () => {
                                             src={`${
                                                 import.meta.env.VITE_IMG_URL
                                             }/${item.image}`}
-                                            alt="Caffe Latte"
                                         />
 
                                         <Stack>

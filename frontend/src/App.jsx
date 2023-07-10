@@ -9,6 +9,7 @@ import Cart from "./pages/Cart";
 import CourseCreate from "./pages/CourseCreate";
 import SingleCourse from "./pages/SingleCourse";
 import ForgotPassword from "./pages/ForgotPassword";
+import Checkout from "./pages/Checkout";
 
 const router = createBrowserRouter([
     {
@@ -50,6 +51,10 @@ const router = createBrowserRouter([
             {
                 path: "/forgot-password",
                 element: <ForgotPassword />,
+            },
+            {
+                path: "/checkout",
+                element: <Checkout />,
             },
         ],
     },

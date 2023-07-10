@@ -6,13 +6,9 @@ import {
     ModalCloseButton,
     ModalBody,
     Button,
-    Box,
-    Divider,
-    Avatar,
-    Text,
 } from "@chakra-ui/react";
 import React from "react";
-import Rating from "./Rating";
+import CommentComponent from "./CommentComponent";
 
 const ReviewModal = ({ isOpen, onClose, onOpen, course }) => {
     return (
@@ -41,48 +37,11 @@ const ReviewModal = ({ isOpen, onClose, onOpen, course }) => {
                     <ModalCloseButton />
                     <ModalBody>
                         {course?.comment?.map((com) => (
-                            <Box marginY={"10px"} maxH={"200px"}>
-                                <Divider />
-                                <Box mt={"10px"} display={"flex"} gap={"20px"}>
-                                    <Avatar
-                                        name={com.user.name}
-                                        color={"white"}
-                                        bg={"black"}
-                                    />
-                                    <Box
-                                        display={"flex"}
-                                        flexDirection={"column"}
-                                    >
-                                        <Text
-                                            fontWeight={"bold"}
-                                            fontSize={"20px"}
-                                        >
-                                            {com.user.name}
-                                        </Text>
-                                        <Rating
-                                            value={
-                                                course.rating.find(
-                                                    (rating) =>
-                                                        rating.user_id ===
-                                                        com.user.id
-                                                )?.rating || 0
-                                            }
-                                            text={`(${
-                                                course.rating.find(
-                                                    (rating) =>
-                                                        rating.user_id ===
-                                                        com.user.id
-                                                )?.rating || 0
-                                            })`}
-                                            color={"#FDCC0D"}
-                                        />
-                                    </Box>
-                                </Box>
-
-                                <Box m={"20px"}>
-                                    {com.comment.substring(0, 300)}
-                                </Box>
-                            </Box>
+                            <CommentComponent
+                                width={"100%"}
+                                comment={com}
+                                course={course}
+                            />
                         ))}
                     </ModalBody>
                 </ModalContent>

@@ -170,21 +170,23 @@ const Cart = () => {
                         >
                             {totalPrice} $
                         </Text>
-                        <Button
-                            border="2px solid #a435f0"
-                            borderRadius="0px"
-                            bgColor="#a435f0"
-                            color="white"
-                            width={"100%"}
-                            size="md"
-                            marginY={"10px"}
-                            _hover={{
-                                border: "2px solid #7325a3",
-                                bgColor: "#7325a3",
-                            }}
-                        >
-                            Checkout
-                        </Button>
+                        <ReachLink to={"/checkout"}>
+                            <Button
+                                border="2px solid #a435f0"
+                                borderRadius="0px"
+                                bgColor="#a435f0"
+                                color="white"
+                                width={"100%"}
+                                size="md"
+                                marginY={"10px"}
+                                _hover={{
+                                    border: "2px solid #7325a3",
+                                    bgColor: "#7325a3",
+                                }}
+                            >
+                                Checkout
+                            </Button>
+                        </ReachLink>
                         <Divider />
                     </Box>
                 </Box>
