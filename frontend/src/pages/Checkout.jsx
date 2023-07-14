@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import PaymentMethodSelection from "../components/PaymentMethodSelection";
 import { GrSecure } from "react-icons/gr";
 import { useCartStore } from "../services/cart";
-import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import Paypal from "../components/Paypal";
 import Stripe from "../components/Stripe";
 
@@ -60,7 +59,7 @@ const Checkout = () => {
                                 borderRadius={"2xl"}
                                 display={"flex"}
                                 justifyContent={"space-between"}
-                                padding={"20px"}
+                                padding={"10px"}
                                 alignItems={"center"}
                             >
                                 <Image
@@ -89,9 +88,9 @@ const Checkout = () => {
                         <Divider mb={"20px"} borderColor="blackAlpha.800" />
                     </Box>
                     {selectedMethod === "PayPal" ? (
-                        <Paypal />
+                        <Paypal totalPrice={totalPrice} />
                     ) : selectedMethod === "Stripe" ? (
-                        <Stripe />
+                        <Stripe amount={totalPrice} />
                     ) : (
                         <></>
                     )}

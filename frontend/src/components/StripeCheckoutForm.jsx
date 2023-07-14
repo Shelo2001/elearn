@@ -3,11 +3,14 @@ import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import axios from "axios";
 import { useNavigate } from "react-router";
 import { Box, Button } from "@chakra-ui/react";
+import { useCartStore } from "../services/cart";
 
-export default function StripeCheckoutForm() {
+export default function StripeCheckoutForm({ amount }) {
     const stripe = useStripe();
     const elements = useElements();
     const navigate = useNavigate();
+
+    const { cartItems } = useCartStore();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -22,7 +25,9 @@ export default function StripeCheckoutForm() {
                 const response = await axios.post(
                     `${import.meta.env.VITE_BASE_URL}/stripe`,
                     {
-                        amount: 10000,
+                        amount: amount * 100,
+                        courses: cartItems,
+                        user_id: JSON.parse(localStorage.getItem("user")).id,
                         id,
                     }
                 );

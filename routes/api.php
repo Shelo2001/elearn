@@ -39,3 +39,4 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     
 });
 Route::post('/stripe',[PaymentController::class,'stripePost']);
+Route::post('/paypal',[PaymentController::class,'paypalPost']);

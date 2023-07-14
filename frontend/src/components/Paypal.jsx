@@ -1,8 +1,12 @@
 import { Box } from "@chakra-ui/react";
 import { PayPalButtons, PayPalScriptProvider } from "@paypal/react-paypal-js";
 import React from "react";
+import { useCartStore } from "../services/cart";
+import axios from "axios";
 
-const Paypal = () => {
+const Paypal = ({ totalPrice }) => {
+    const { cartItems } = useCartStore();
+
     return (
         <Box w={"70%"} margin={"auto"}>
             <PayPalScriptProvider
@@ -17,7 +21,7 @@ const Paypal = () => {
                             purchase_units: [
                                 {
                                     amount: {
-                                        value: "1.99",
+                                        value: totalPrice,
                                     },
                                 },
                             ],
@@ -25,8 +29,23 @@ const Paypal = () => {
                     }}
                     onApprove={(data, actions) => {
                         return actions.order.capture().then((details) => {
-                            const name = details.payer.name.given_name;
-                            alert(`Transaction completed by ${name}`);
+                            if (details.status === "COMPLETED") {
+                                const createPayment = async () => {
+                                    const response = await axios.post(
+                                        `${
+                                            import.meta.env.VITE_BASE_URL
+                                        }/paypal`,
+                                        {
+                                            courses: cartItems,
+                                            user_id: JSON.parse(
+                                                localStorage.getItem("user")
+                                            ).id,
+                                        }
+                                    );
+                                    console.log(response);
+                                };
+                                createPayment();
+                            }
                         });
                     }}
                 />
