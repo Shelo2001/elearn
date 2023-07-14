@@ -88,7 +88,13 @@ const Checkout = () => {
                         </Text>
                         <Divider mb={"20px"} borderColor="blackAlpha.800" />
                     </Box>
-                    {selectedMethod === "PayPal" ? <Paypal /> : <Stripe />}
+                    {selectedMethod === "PayPal" ? (
+                        <Paypal />
+                    ) : selectedMethod === "Stripe" ? (
+                        <Stripe />
+                    ) : (
+                        <></>
+                    )}
                 </Box>
             </Box>
         </>

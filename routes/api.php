@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CourseController;
+use App\Http\Controllers\PaymentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,3 +38,4 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/course/mycourses/{userId}', [CourseController::class, 'getMyCreatedCourses']);
     
 });
+Route::post('/stripe',[PaymentController::class,'stripePost']);
