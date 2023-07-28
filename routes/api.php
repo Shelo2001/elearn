@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\VideoController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\PaymentController;
 
@@ -40,3 +41,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 });
 Route::post('/stripe',[PaymentController::class,'stripePost']);
 Route::post('/paypal',[PaymentController::class,'paypalPost']);
+
+Route::post('/upload/video',[VideoController::class, 'upload']);
+Route::get('/course/{courseId}/videos',[VideoController::class, 'getCourseVideos']);
+Route::get('/video/{video}',[VideoController::class, 'streamVideo']);

@@ -15,20 +15,34 @@ import {
     ModalBody,
 } from "@chakra-ui/react";
 import InputLabel from "./InputLabel";
+import axios from "axios";
 
 const NewVideo = ({ id, onClose, onOpen, isOpen }) => {
     const [title, setTitle] = useState("");
-    const [selectedFile, setSelectedFile] = useState(null);
+    const [video, setVideo] = useState(null);
 
     const handleFileChange = (event) => {
-        setSelectedFile(event.target.files[0]);
+        setVideo(event.target.files[0]);
     };
 
     const handleUpload = (e) => {
         e.preventDefault();
+
+        const formData = new FormData();
+        formData.append("video", video);
+        formData.append("title", title);
+        formData.append("course_id", id);
+        const upload = async () => {
+            const res = await axios.post(
+                `${import.meta.env.VITE_BASE_URL}/upload/video`,
+                formData
+            );
+            console.log(res);
+        };
+        upload();
     };
 
-    console.log(selectedFile);
+    console.log(video);
 
     return (
         <>
