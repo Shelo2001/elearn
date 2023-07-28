@@ -7,6 +7,7 @@ use App\Models\Course;
 use App\Models\Rating;
 use App\Models\Comment;
 use Illuminate\Http\Request;
+use App\Models\Notifications;
 use App\Events\NotificationsEvent;
 use Intervention\Image\Facades\Image;
 
@@ -78,7 +79,16 @@ class CourseController extends Controller
         $rating->save();
         $comment->save();
 
-        event(new NotificationsEvent($request->comment,$request->author_id,$request->course_id,$request->username));
+        event(new NotificationsEvent($request->comment,$request->author_id,$request->course_id,$request->username,"commented"));
+        
+        $notifications = new Notifications();
+        $notifications->message = $request->comment;
+        $notifications->user_id = $request->user_id;
+        $notifications->username = $request->username;
+        $notifications->author_id = $request->author_id;
+        $notifications->course_id = $request->course_id;
+        $notifications->action = "commented";
+        $notifications->save();
 
         return response(["success"=>true],201);
     }

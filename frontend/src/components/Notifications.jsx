@@ -57,7 +57,7 @@ const Notifications = () => {
                 ></IconButton>
             </PopoverTrigger>
             <Box position={"absolute"} top="20px" right={"84px"}>
-                {notifications.length}
+                {notifications.length == 0 ? <></> : notifications.length}
             </Box>
             <Portal>
                 <PopoverContent>
@@ -67,9 +67,14 @@ const Notifications = () => {
                         ) : (
                             notifications.map((notification) => (
                                 <Link to={`/course/${notification.courseId}`}>
-                                    <Box padding={"3px"} bgColor={"blue.100"}>
+                                    <Box
+                                        padding={"3px"}
+                                        mt={"10px"}
+                                        bgColor={"blue.100"}
+                                    >
                                         <Text p={"3px"}>
-                                            {notification.username} commented:{" "}
+                                            {notification.username}{" "}
+                                            {notification.action}:{" "}
                                             {notification.message}
                                         </Text>
                                     </Box>

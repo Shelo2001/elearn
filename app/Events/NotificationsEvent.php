@@ -18,13 +18,15 @@ class NotificationsEvent implements ShouldBroadcast
     public $userId;
     public $courseId;
     public $username;
+    public $action;
 
-    public function __construct($message,$userId,$courseId,$username)
+    public function __construct($message,$userId,$courseId,$username,$action)
     {
         $this->message = $message;
         $this->userId = $userId;
         $this->courseId = $courseId;
         $this->username = $username;
+        $this->action = $action;
     }
 
     /**

@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Alert, Box, useDisclosure } from "@chakra-ui/react";
+import { Alert, Box, Heading, useDisclosure } from "@chakra-ui/react";
 import { useParams } from "react-router-dom";
 import { useCourses } from "../services/courses";
 import ReviewComponent from "../components/ReviewComponent";
@@ -23,6 +23,8 @@ const SingleCourse = () => {
         return myOrderedCourses.some((order) => order.course_id == id);
     };
 
+    console.log(course);
+
     return (
         <div>
             {hasOrderedCourse() ? (
@@ -33,9 +35,22 @@ const SingleCourse = () => {
                     videos={course.videos}
                 />
             ) : (
-                <Alert w={"50%"} ml={"20px"}>
-                    You have to buy this course to access content.
-                </Alert>
+                <>
+                    <Heading ml={"40px"}>Content</Heading>
+                    {course?.videos?.map((v, index) => (
+                        <Heading
+                            mb={"5px"}
+                            fontWeight={"medium"}
+                            ml={"60px"}
+                            fontSize={"24px"}
+                        >
+                            {index + 1}. {v.title}
+                        </Heading>
+                    ))}
+                    <Alert w={"50%"} ml={"20px"}>
+                        You have to buy this course to access content.
+                    </Alert>
+                </>
             )}
             <Box mx={"30px"} w={"50%"} display={"flex"} gap={"10px"}>
                 {course?.comment?.slice(0, 2).map((com) => (
