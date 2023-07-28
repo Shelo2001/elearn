@@ -10,6 +10,9 @@ import CourseCreate from "./pages/CourseCreate";
 import SingleCourse from "./pages/SingleCourse";
 import ForgotPassword from "./pages/ForgotPassword";
 import Checkout from "./pages/Checkout";
+import MyLearning from "./pages/MyLearning";
+import Profile from "./pages/Profile";
+import CourseFileUpload from "./pages/CourseFileUpload";
 
 const router = createBrowserRouter([
     {
@@ -55,6 +58,18 @@ const router = createBrowserRouter([
             {
                 path: "/checkout",
                 element: <Checkout />,
+            },
+            {
+                path: "/mylearning",
+                element: <MyLearning />,
+            },
+            {
+                path: "/profile",
+                element: <Profile />,
+            },
+            {
+                path: "/course/upload/:id",
+                element: <CourseFileUpload />,
             },
         ],
     },

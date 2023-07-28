@@ -1,5 +1,5 @@
 import React from "react";
-import { Avatar, Box, Divider, Text, useDisclosure } from "@chakra-ui/react";
+import { Avatar, Box, Divider, Text } from "@chakra-ui/react";
 import Rating from "../components/Rating";
 
 const CommentComponent = ({ comment, course, width }) => {

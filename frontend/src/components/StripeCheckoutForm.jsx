@@ -34,6 +34,7 @@ export default function StripeCheckoutForm({ amount }) {
                 console.log(response);
 
                 if (response?.data[0] === "succeeded") {
+                    navigate("/mylearning");
                 }
             } catch (error) {
                 console.log("Error", error);

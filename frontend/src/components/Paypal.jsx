@@ -3,9 +3,11 @@ import { PayPalButtons, PayPalScriptProvider } from "@paypal/react-paypal-js";
 import React from "react";
 import { useCartStore } from "../services/cart";
 import axios from "axios";
+import { useNavigate } from "react-router";
 
 const Paypal = ({ totalPrice }) => {
     const { cartItems } = useCartStore();
+    const navigate = useNavigate();
 
     return (
         <Box w={"70%"} margin={"auto"}>
@@ -45,6 +47,7 @@ const Paypal = ({ totalPrice }) => {
                                     console.log(response);
                                 };
                                 createPayment();
+                                navigate("/mylearning");
                             }
                         });
                     }}
