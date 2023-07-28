@@ -5,6 +5,7 @@ import axios from "axios";
 export const useCourses = create(
     devtools((set) => ({
         courses: [],
+        myOrderedCourses: [],
         course: {},
         loading: false,
         success: null,
@@ -63,6 +64,15 @@ export const useCourses = create(
                 { headers: { Authorization: `Bearer ${token}` } }
             );
             set({ courses: data.courses, loading: false });
+        },
+        getMyOrderedCourses: async (id) => {
+            set({ loading: true });
+            let token = localStorage.getItem("token");
+            const { data } = await axios.get(
+                `${import.meta.env.VITE_BASE_URL}/course/myordered/${id}`,
+                { headers: { Authorization: `Bearer ${token}` } }
+            );
+            set({ myOrderedCourses: data.courses, loading: false });
         },
         createReview: async (data) => {
             try {

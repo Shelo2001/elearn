@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\User;
+use App\Models\Video;
 use App\Models\Rating;
 use App\Models\Comment;
 use Illuminate\Database\Eloquent\Model;
@@ -33,5 +34,9 @@ class Course extends Model
 
     public function comment(){
         return $this->hasMany(Comment::class);
+    }
+
+    public function videos(){
+        return $this->hasMany(Video::class);
     }
 }

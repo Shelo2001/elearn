@@ -22,7 +22,12 @@ const CourseFileUpload = () => {
                 onOpen={onOpen}
                 isOpen={isOpen}
             />
-            <VideoList videos={courseVideos} />
+            <VideoList
+                width={"320px"}
+                height={"160px"}
+                container={"320px"}
+                videos={courseVideos}
+            />
         </div>
     );
 };

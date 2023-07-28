@@ -5,8 +5,6 @@ import { useCartStore } from "../services/cart";
 const PopoverCourse = ({ course }) => {
     const { addToCart, cartItems } = useCartStore();
 
-    console.log(cartItems);
-
     const formatDate = (dateString) => {
         const options = { year: "numeric", month: "long", day: "numeric" };
         return new Date(dateString).toLocaleDateString(undefined, options);

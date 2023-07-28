@@ -37,6 +37,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/course/create', [CourseController::class, 'createCourse']);
     Route::post('/course/review/create', [CourseController::class, 'createReview']);
     Route::get('/course/mycourses/{userId}', [CourseController::class, 'getMyCreatedCourses']);
+    Route::get('/course/myordered/{userId}', [CourseController::class, 'getMyOrderedCourses']);
     
 });
 Route::post('/stripe',[PaymentController::class,'stripePost']);

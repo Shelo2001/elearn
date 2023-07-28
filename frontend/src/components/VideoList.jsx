@@ -3,7 +3,7 @@ import React, { useEffect, useRef } from "react";
 import videojs from "video.js";
 import "video.js/dist/video-js.css";
 
-const VideoList = ({ videos }) => {
+const VideoList = ({ videos, width, height, container }) => {
     const videoRefs = useRef([]);
 
     useEffect(() => {
@@ -41,11 +41,11 @@ const VideoList = ({ videos }) => {
             flexWrap={"wrap"}
         >
             {videos.map((video, index) => (
-                <Box width={"320px"} key={video.id}>
+                <Box width={container} key={video.id}>
                     <h1 fontSize={"25px"}>
                         {index + 1}.{video.title.substring(0, 30)}...
                     </h1>
-                    <Box w={"320px"} h="180px">
+                    <Box w={width} h={height}>
                         <video
                             ref={(el) => (videoRefs.current[index] = el)}
                             className="video-js vjs-default-skin"

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
 use App\Models\Course;
 use App\Models\Rating;
 use App\Models\Comment;
@@ -51,7 +52,7 @@ class CourseController extends Controller
     }
 
     public function getCourseById($courseId){
-        $course = Course::where('id',$courseId)->where('is_published',true)->with('user:id,name','rating','comment.user:id,name')->first();
+        $course = Course::where('id',$courseId)->where('is_published',true)->with('user:id,name','rating','comment.user:id,name','videos')->first();
         return response(["course"=>$course,],200);
     }
 
@@ -78,6 +79,12 @@ class CourseController extends Controller
 
     public function getMyCreatedCourses($userId){
         $courses = Course::where('user_id',$userId)->with('user:id,name','rating','comment.user:id,name')->get();
+
+        return response(["courses"=>$courses],200);
+    }
+
+    public function getMyOrderedCourses($userId){
+        $courses = Order::where('user_id',$userId)->get();
 
         return response(["courses"=>$courses],200);
     }
