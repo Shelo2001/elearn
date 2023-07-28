@@ -7,6 +7,7 @@ use App\Models\Course;
 use App\Models\Rating;
 use App\Models\Comment;
 use Illuminate\Http\Request;
+use App\Events\NotificationsEvent;
 use Intervention\Image\Facades\Image;
 
 class CourseController extends Controller
@@ -60,8 +61,10 @@ class CourseController extends Controller
         $attr = $request->validate([
             'course_id' => 'required',
             'user_id' => 'required',
+            'username' => 'required',
             'rating' => 'required',
-            'comment' => 'required'
+            'comment' => 'required',
+            'author_id' => 'required',
         ]);
 
         $rating = new Rating();
@@ -74,6 +77,9 @@ class CourseController extends Controller
         $comment->comment = $request->comment;
         $rating->save();
         $comment->save();
+
+        event(new NotificationsEvent($request->comment,$request->author_id,$request->course_id,$request->username));
+
         return response(["success"=>true],201);
     }
 
@@ -88,4 +94,5 @@ class CourseController extends Controller
 
         return response(["courses"=>$courses],200);
     }
+
 }

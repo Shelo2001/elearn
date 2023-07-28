@@ -22,7 +22,6 @@ const Navbar = () => {
     const [user, setUser] = useState(null);
 
     const { logout } = useAuthentication();
-    const { cartItems } = useCartStore();
 
     useEffect(() => {
         setUser(JSON.parse(localStorage.getItem("user")));

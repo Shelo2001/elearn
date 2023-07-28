@@ -16,7 +16,7 @@ const SingleCourse = () => {
 
     useEffect(() => {
         getCourseById(id);
-        getMyOrderedCourses(user.id);
+        getMyOrderedCourses(user?.id);
     }, []);
 
     const hasOrderedCourse = () => {

@@ -31,11 +31,12 @@ const ReviewComponent = ({ course }) => {
             user_id: user.id,
             rating: reviewRating,
             comment,
+            author_id: course.user.id,
+            username: user.name,
         };
 
         createReview(data);
     };
-
     return (
         <Box mx={"30px"} my={"50px"} w={"50%"}>
             {!user ? (

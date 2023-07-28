@@ -14,7 +14,7 @@ const VideoList = ({ videos, width, height, container }) => {
                 fluid: true,
             });
 
-            player.src({
+            player?.src({
                 type: "video/mp4",
                 src: `${import.meta.env.VITE_BASE_URL}/video/${video.video}`,
             });

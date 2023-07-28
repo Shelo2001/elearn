@@ -9,16 +9,27 @@ import {
     Text,
     Link,
 } from "@chakra-ui/react";
-import React from "react";
+import React, { useEffect } from "react";
 import { useCartStore } from "../services/cart";
 import { Link as ReachLink } from "react-router-dom";
 import nocart from "../assets/nocart.jpg";
 import Rating from "../components/Rating";
+import axios from "axios";
 
 const Cart = () => {
     const { cartItems, removeFromCart } = useCartStore();
 
     const totalPrice = cartItems.reduce((sum, course) => sum + course.price, 0);
+
+    useEffect(() => {
+        const get = async () => {
+            const res = await axios.get(
+                `${import.meta.env.VITE_BASE_URL}/sendmessage`
+            );
+            console.log(res);
+        };
+        get();
+    }, []);
 
     return (
         <Box paddingX={"200px"} mt={"10"}>
