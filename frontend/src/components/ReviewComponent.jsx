@@ -38,7 +38,7 @@ const ReviewComponent = ({ course }) => {
         createReview(data);
     };
     return (
-        <Box mx={"30px"} my={"50px"} w={"50%"}>
+        <Box mx={"20px"} my={"50px"} w={"50%"}>
             {!user ? (
                 <Alert>
                     Please&nbsp;
