@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Models\Order;
 use App\Models\Course;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
@@ -47,4 +48,8 @@ class User extends Authenticatable
     public function course(){
        return $this->hasMany(Course::class);
     }
+
+    public function order(){
+        return $this->hasMany(Order::class);
+     }
 }

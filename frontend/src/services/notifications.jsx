@@ -17,7 +17,7 @@ export const useNotifications = create(
             console.log(data);
         },
         deleteNotifications: async (notifications) => {
-            const { data } = await axios.delete(
+            const { data } = await axios.post(
                 `${import.meta.env.VITE_BASE_URL}/notifications/delete`,
                 notifications
             );

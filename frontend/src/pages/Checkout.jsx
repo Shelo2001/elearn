@@ -1,12 +1,22 @@
 import { Box, Divider, Heading, Image, Text } from "@chakra-ui/react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import PaymentMethodSelection from "../components/PaymentMethodSelection";
 import { GrSecure } from "react-icons/gr";
 import { useCartStore } from "../services/cart";
 import Paypal from "../components/Paypal";
 import Stripe from "../components/Stripe";
+import { useNavigate } from "react-router";
 
 const Checkout = () => {
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        let user = JSON.parse(localStorage.getItem("user"));
+        if (!user) {
+            navigate("/login");
+        }
+    }, []);
+
     const [selectedMethod, setSelectedMethod] = useState(null);
     const { cartItems } = useCartStore();
 

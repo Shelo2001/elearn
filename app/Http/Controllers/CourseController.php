@@ -105,4 +105,10 @@ class CourseController extends Controller
         return response(["courses"=>$courses],200);
     }
 
+    public function getMyLearning($userId){
+        $courses = Order::where('user_id',$userId)->with('course')->with('user')->get();
+
+        return response(["courses"=>$courses],200);
+    }
+
 }

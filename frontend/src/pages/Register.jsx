@@ -8,6 +8,9 @@ import {
     Button,
     Stack,
     Box,
+    Alert,
+    AlertIcon,
+    AlertTitle,
 } from "@chakra-ui/react";
 import google from "../assets/google.png";
 import InputLabel from "../components/InputLabel";
@@ -15,7 +18,8 @@ import { Link as ReachLink } from "react-router-dom";
 import { useAuthentication } from "../services/authentication";
 
 const Register = () => {
-    const { getGoogleAuthUrl, googleUrl, register } = useAuthentication();
+    const { getGoogleAuthUrl, googleUrl, register, errorUser } =
+        useAuthentication();
 
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
@@ -50,6 +54,12 @@ const Register = () => {
                 borderRadius="md"
                 margin="0 auto"
             >
+                {errorUser && (
+                    <Alert mb={"10px"} status="error">
+                        <AlertIcon />
+                        <AlertTitle>{errorUser}</AlertTitle>
+                    </Alert>
+                )}
                 <form onSubmit={submitHandler}>
                     <Stack spacing={4}>
                         <FormControl>

@@ -9,6 +9,9 @@ import {
     Button,
     Stack,
     Box,
+    Alert,
+    AlertIcon,
+    AlertTitle,
 } from "@chakra-ui/react";
 import google from "../assets/google.png";
 import InputLabel from "../components/InputLabel";
@@ -21,7 +24,7 @@ const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
-    const { login: loginUser } = useAuthentication();
+    const { login: loginUser, errorUser } = useAuthentication();
 
     useEffect(() => {
         const googleLogin = async () => {
@@ -58,6 +61,12 @@ const Login = () => {
                 borderRadius="md"
                 margin="0 auto"
             >
+                {errorUser && (
+                    <Alert mb={"10px"} status="error">
+                        <AlertIcon />
+                        <AlertTitle>{errorUser}</AlertTitle>
+                    </Alert>
+                )}
                 <form onSubmit={submitHandler}>
                     <Stack spacing={4}>
                         <FormControl>
@@ -113,11 +122,9 @@ const Login = () => {
                             <img src={google} width="40px" height="40px" />{" "}
                             <a href={`${login}`}>Continue with Google</a>
                         </Button>
-                        <ReachLink to="/forgot-password">
-                            <Link float={"right"} color="#a435f0">
-                                Forgot password?
-                            </Link>
-                        </ReachLink>
+                        <Link float={"right"} color="#a435f0">
+                            Forgot password?
+                        </Link>
                     </Stack>
                 </form>
                 <Box position="relative" padding="10">

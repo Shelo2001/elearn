@@ -49,3 +49,4 @@ Route::get('/course/{courseId}/videos',[VideoController::class, 'getCourseVideos
 Route::get('/video/{video}',[VideoController::class, 'streamVideo']);
 Route::put('/notifications/{notificationsId}/seen',[NotificationsController::class, 'setNotificationsToSeen']);
 Route::post('/notifications/delete',[NotificationsController::class, 'deleteNotifications']);
+Route::get('/course/mylearning/{userId}',[CourseController::class, 'getMyLearning']);

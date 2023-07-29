@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\User;
+use App\Models\Order;
 use App\Models\Video;
 use App\Models\Rating;
 use App\Models\Comment;
@@ -38,5 +39,9 @@ class Course extends Model
 
     public function videos(){
         return $this->hasMany(Video::class);
+    }
+
+    public function order(){
+        return $this->belongsTo(Order::class);
     }
 }

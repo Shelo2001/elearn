@@ -43,13 +43,13 @@ const SingleCourse = () => {
                 my={"100px"}
             >
                 <Image
-                    src={`${import.meta.env.VITE_IMG_URL}/${course.image}`}
+                    src={`${import.meta.env.VITE_IMG_URL}/${course?.image}`}
                 />
                 <Text ml={"2px"} fontWeight={"bold"} fontSize={"18px"}>
-                    {course.title}
+                    {course?.title}
                 </Text>
                 <Text ml={"10px"} fontSize={"14px"}>
-                    {course.description}
+                    {course?.description}
                 </Text>
                 <Text
                     ml={"2px"}
@@ -57,7 +57,7 @@ const SingleCourse = () => {
                     fontWeight={"bolder"}
                     fontSize={"22px"}
                 >
-                    ${course.price}
+                    ${course?.price}
                 </Text>
                 {hasOrderedCourse() ? (
                     <Button
@@ -104,7 +104,7 @@ const SingleCourse = () => {
                         width={"500px"}
                         height={"360px"}
                         container={"500px"}
-                        videos={course.videos}
+                        videos={course?.videos}
                     />
                 </>
             ) : (
