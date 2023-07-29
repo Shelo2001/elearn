@@ -98,12 +98,15 @@ const SingleCourse = () => {
                 )}
             </Box>
             {hasOrderedCourse() ? (
-                <VideoList
-                    width={"500px"}
-                    height={"360px"}
-                    container={"500px"}
-                    videos={course.videos}
-                />
+                <>
+                    <Heading ml={"40px"}>Content</Heading>
+                    <VideoList
+                        width={"500px"}
+                        height={"360px"}
+                        container={"500px"}
+                        videos={course.videos}
+                    />
+                </>
             ) : (
                 <>
                     <Heading ml={"40px"}>Content</Heading>

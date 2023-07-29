@@ -6,6 +6,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\VideoController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\NotificationsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,7 +39,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/course/review/create', [CourseController::class, 'createReview']);
     Route::get('/course/mycourses/{userId}', [CourseController::class, 'getMyCreatedCourses']);
     Route::get('/course/myordered/{userId}', [CourseController::class, 'getMyOrderedCourses']);
-    
+    Route::get('/notifications/{userId}',[NotificationsController::class, 'getNotifications']);
 });
 Route::post('/stripe',[PaymentController::class,'stripePost']);
 Route::post('/paypal',[PaymentController::class,'paypalPost']);
@@ -46,3 +47,5 @@ Route::post('/paypal',[PaymentController::class,'paypalPost']);
 Route::post('/upload/video',[VideoController::class, 'upload']);
 Route::get('/course/{courseId}/videos',[VideoController::class, 'getCourseVideos']);
 Route::get('/video/{video}',[VideoController::class, 'streamVideo']);
+Route::put('/notifications/{notificationsId}/seen',[NotificationsController::class, 'setNotificationsToSeen']);
+Route::post('/notifications/delete',[NotificationsController::class, 'deleteNotifications']);

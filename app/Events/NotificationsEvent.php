@@ -15,16 +15,16 @@ class NotificationsEvent implements ShouldBroadcast
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     public $message;
-    public $userId;
-    public $courseId;
+    public $user_id;
+    public $course_id;
     public $username;
     public $action;
 
-    public function __construct($message,$userId,$courseId,$username,$action)
+    public function __construct($message,$user_id,$course_id,$username,$action)
     {
         $this->message = $message;
-        $this->userId = $userId;
-        $this->courseId = $courseId;
+        $this->user_id = $user_id;
+        $this->course_id = $course_id;
         $this->username = $username;
         $this->action = $action;
     }
@@ -36,7 +36,7 @@ class NotificationsEvent implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return ['new-comments.'.$this->userId];
+        return ['new-comments.'.$this->user_id];
     }
 
     public function broadcastAs()
